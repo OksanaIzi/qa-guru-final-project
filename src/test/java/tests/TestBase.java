@@ -7,12 +7,13 @@ import org.junit.jupiter.api.BeforeAll;
 
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 import static com.codeborne.selenide.logevents.SelenideLogger.addListener;
+import static helpers.DriverHelper.configureDriver;
 
 public class TestBase {
+
     @BeforeAll
     static void setUp(){
-        addListener("AllureSelenide", new AllureSelenide());
-        Configuration.startMaximized = true;
+        configureDriver();
     }
 
     @AfterEach
