@@ -16,8 +16,14 @@ public class MainPageTests extends TestBase {
 
     @Test
     public void checkSuccessfulOpenPage(){
-        steps.openPage(BASE_URL);
-        steps.checkTitle();
+        steps.openPage(BASE_URL)
+                .checkTitle();
+    }
+
+    @Test
+    public void checkSuccessfulOpenPage2(){
+        steps.openMainPage(BASE_URL);
+        steps.checkText();
     }
 }
 
