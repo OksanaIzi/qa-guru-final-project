@@ -1,29 +1,45 @@
 package tests.UI.tests;
 
-import com.codeborne.selenide.Condition;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Owner;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import tests.TestBase;
 import tests.UI.steps.MainPageSteps;
 
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
-
+@Tag("ui")
+@Owner("OIzibekova")
+@Feature("Главная страница")
 public class MainPageTests extends TestBase {
 
-    public final static String BASE_URL = "https://m2.ru";
+    public final static String BASE_URL = "https://www.cian.ru/";
 
     MainPageSteps steps = new MainPageSteps();
 
+
     @Test
+    @DisplayName("Проверка заголовка")
     public void checkSuccessfulOpenPage(){
         steps.openPage(BASE_URL)
                 .checkTitle();
     }
 
+
     @Test
-    public void checkSuccessfulOpenPage2(){
-        steps.openMainPage(BASE_URL);
-        steps.checkText();
+    @DisplayName("Проверка разделов")
+    public void checkTopBarMenuItems(){
+        steps.openPage(BASE_URL)
+                .topBarItems();
     }
+
+
+    @Test
+    @DisplayName("Проверка вкладок")
+    public void checkMenuItems(){
+        steps.openPage(BASE_URL)
+                .checkMenuItems();
+    }
+
 }
 

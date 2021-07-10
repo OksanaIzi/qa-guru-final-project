@@ -6,7 +6,6 @@ import io.qameta.allure.Step;
 import static com.codeborne.selenide.Selectors.byTitle;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
-import static io.qameta.allure.Allure.step;
 
 public class MainPageSteps {
 
@@ -18,21 +17,30 @@ public class MainPageSteps {
 
     @Step("Check page title")
     public MainPageSteps checkTitle() {
-        $("[data-gtm='main-show-search-link-banner-samolet'] > p[class='home-promo2-block-module--title--21mDL markdown-module--h1--2sIse markdown-module--white-variant--3JkiE']")
-                .shouldHave(Condition.text("Отвечаем за каждый квадратный метр"));
+        $(byTitle("Циан - база недвижимости в Московской области | Продажа, аренда квартир и другой недвижимости")).shouldBe();
         return this;
     }
 
-    public void openMainPage(String url) {
-        step("Открытие сайта m2", () -> {
-            open(url);
-        });
+    @Step("Check top bar menu items")
+    public MainPageSteps topBarItems(){
+        $("a[data-ref=\"rent\"]").shouldHave(Condition.text("Аренда"));
+        $("a[data-ref=\"sale\"]").shouldHave(Condition.text("Продажа"));
+        $("a[data-ref=\"newbuildings\"]").shouldHave(Condition.text("Новостройки"));
+        $("a[data-ref=\"commercial\"]").shouldHave(Condition.text("Коммерческая"));
+        $("a[data-ref=\"calculator\"]").shouldHave(Condition.text("Оценка"));
+        $("a[data-ref=\"mortgage\"]").shouldHave(Condition.text("Ипотека"));
+        $("#header-sp-link-container a[data-name=\"SpecialPromoLink\"]").shouldBe();
+        return this;
     }
 
-    public void checkText() {
-        step("Проверить заголовок главной странице", () -> {
-            $("[data-gtm='main-show-search-link-banner-samolet'] > p[class='home-promo2-block-module--title--21mDL markdown-module--h1--2sIse markdown-module--white-variant--3JkiE']")
-                    .shouldHave(Condition.text("Отвечаем за каждый квадратный метр"));
-        });
+    @Step("Check menu items")
+    public MainPageSteps checkMenuItems() {
+        $("a[href='/kupit/']").shouldBe(Condition.enabled);
+        $("a[href='/snyat/']").shouldBe(Condition.enabled);
+        $("a[href='/kalkulator-nedvizhimosti/']").shouldBe(Condition.enabled);
+        $("a[href='/mortgage/']").shouldBe(Condition.enabled);
+        $("a[href='/realtors/']").shouldBe(Condition.enabled);
+        $("a[href='https://promo.cian.ru/sday-snimi-2/arenda']").shouldBe();
+        return this;
     }
 }
